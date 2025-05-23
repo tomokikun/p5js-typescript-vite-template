@@ -1,22 +1,16 @@
 import p5 from 'p5';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const preload = (_p: p5) => {
-  // Preload assets if needed
-  // p.loadImage('path/to/image.png');
-};
+let img: p5.Image | null = null;
 
-const setup = (p: p5) => {
+const setup = async (p: p5) => {
+  img = await p.loadImage('./assets/sample.png');
   p.createCanvas(800, 600);
-};
-
-const draw = (p: p5) => {
   p.background(0);
   p.ellipse(p.width / 2, p.height / 2, 100, 100);
+
+  p.image(img, 0, 0);
 };
 
 new p5((p: p5) => {
-  p.preload = () => preload(p);
   p.setup = () => setup(p);
-  p.draw = () => draw(p);
 });
